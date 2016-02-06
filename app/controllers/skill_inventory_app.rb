@@ -40,7 +40,7 @@ class SkillInventoryApp < Sinatra::Base
   end
 
   delete "/skills/:id" do |id|
-    skills_inventory.delete(id.to_i)
+    skill_inventory.delete(id.to_i)
     redirect "/skills"
   end
 
@@ -48,12 +48,12 @@ class SkillInventoryApp < Sinatra::Base
     erb :error
   end
 
-  def skills_inventory
+  def skill_inventory
     if ENV["RACK_ENV"] == "test"
       database = Sequel.sqlite("db/skills_inventory_test.sqlite3")
     else
       database = Sequel.sqlite("db/skills_inventory_development.sqlite3")
     end
-    @skills_inventory ||= SkillInventory.new(database)
+    @skill_inventory ||= SkillInventory.new(database)
   end
 end

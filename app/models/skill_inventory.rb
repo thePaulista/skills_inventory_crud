@@ -31,6 +31,6 @@ class SkillInventory
   end
 
   def find_by(input)
-    dataset.where(input).map {|t| Task.new(t)}
+    dataset.where(input).map {|t| Skill.new(t)}
   end
 end
