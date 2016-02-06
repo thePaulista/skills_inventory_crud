@@ -1,6 +1,14 @@
 <form action="/skills" method="post">
-  <p>Enter a new skill:</p>
-  <input type="text" name="skill[title]"/><br>
-  <textarea name="skill[description]"></textarea><br>
-  <input type="submit"/>
+  <div class="form-group">
+    <h3 class="text-left" class="bg-primary"><strong>Enter a new skill:</strong></h3>
+      <label for="inputTitle">Skill Title</label>
+      <input type="text" class="form-control" id="inputTitle: name="skill[title]"/><br>
+  </div>
+
+  <div class="form-group">
+    <label for="inputDescription">Description</label>
+    <textarea class="form-control" rows="3" name="skill[description]"></textarea><br>
+  </div>
+
+  <button type="submit" class="btn btn-success" value="Submit">Submit</button>
 </form>

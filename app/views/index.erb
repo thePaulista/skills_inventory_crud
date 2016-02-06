@@ -1,6 +1,35 @@
-<!-- <div class="container"> -->
-<h1>My Skills</h1>
+<h1>All Skills</h1>
 
+<ol id="skills">
+  <% @skills.each do |skill| %>
+  <li id="skill-<%= skill.id%>"><a href="/skill/<%= skill.id%>"><%= skill.title %></a></li>
+  <a href="/skills/<%= skill.id %>/edit">Edit</a>
+
+  <form action="/skills/<%= skill.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+  </form>
+
+  <% end %>
+</ol>
+<br>
+<a href="/tasks/new">New Skill</a>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container"> -->
+<!-- <h1>My Skills</h1>
+
+<ol id="skills">
   <% @skills.each do |skill| %>
   <h3><%= skill.id %>: <a href="/skills/<%=skill.id %>"><%= skill.title %></a></h3>
   <a href="/skills/<%= skill.id %>/edit"> Edit</a>
@@ -10,4 +39,5 @@
     <input type="submit" value="delete"/>
   </form>
 <% end %>
+</ol> -->
 <!-- </div> -->

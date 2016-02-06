@@ -4,9 +4,9 @@ class Skill
               :description
 
   def initialize(data)
-    @id           = data["id"]
-    @title        = data["title"]
-    @description  = data["description"]
+    @id           = data[:id]
+    @title        = data[:title]
+    @description  = data[:description]
   end
-  
+
 end

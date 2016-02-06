@@ -1,11 +1,17 @@
-# require 'models/skill_inventory'
-
+# require 'skill_inventory'
 class SkillInventoryApp < Sinatra::Base
-  set :root, File.join(File.dirname(__FILE__), '..')
-  set :method_override, true
+
+  get '/' do
+    erb :dashboard
+  end
 
   get '/skills' do
-    @skills = skill_inventory.all
+    if params[:title]
+      @skills = skill_inventory.find_by(title: params[:title])
+    else
+      # binding.pry
+      @skills = skill_inventory.all
+    end
     erb :index
   end
 
@@ -19,27 +25,35 @@ class SkillInventoryApp < Sinatra::Base
   end
 
   get '/skills/:id' do |id|
-    @skills = skill_inventory.find(id.to_i)
+    @skill = skill_inventory.find(id)
     erb :show
   end
 
   get '/skills/:id/edit' do |id|
-    @skills = skill_inventory.find(id.to_i)
+    @skill = skill_inventory.find(id)
     erb :edit
   end
 
   put '/skills/:id' do |id|
-    skill_inventory.update(params[:task], id)
+    skill_inventory.update(params[:skill], id)
     redirect "/skills/#{id}"
   end
 
   delete "/skills/:id" do |id|
-    skill_inventory.delete(id.to_i)
-    redirect '/skills'
+    skills_inventory.delete(id.to_i)
+    redirect "/skills"
   end
 
-  def skill_inventory
-    database = YAML::Store.new('db/skills_inventory')
-    @skill_inventory ||= SkillInventory.new(database)
+  not_found do
+    erb :error
+  end
+
+  def skills_inventory
+    if ENV["RACK_ENV"] == "test"
+      database = Sequel.sqlite("db/skills_inventory_test.sqlite3")
+    else
+      database = Sequel.sqlite("db/skills_inventory_development.sqlite3")
+    end
+    @skills_inventory ||= SkillInventory.new(database)
   end
 end
