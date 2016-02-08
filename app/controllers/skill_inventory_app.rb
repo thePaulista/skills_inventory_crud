@@ -9,7 +9,6 @@ class SkillInventoryApp < Sinatra::Base
     if params[:title]
       @skills = skill_inventory.find_by(title: params[:title])
     else
-      # binding.pry
       @skills = skill_inventory.all
     end
     erb :index
@@ -21,6 +20,7 @@ class SkillInventoryApp < Sinatra::Base
 
   post '/skills' do
     skill_inventory.create(params[:skill])
+    # binding.pry
     redirect '/skills'
   end
 
@@ -35,12 +35,13 @@ class SkillInventoryApp < Sinatra::Base
   end
 
   put '/skills/:id' do |id|
-    skill_inventory.update(params[:skill], id)
+    skill_inventory.update(params[:skill], id.to_i)
     redirect "/skills/#{id}"
   end
 
   delete "/skills/:id" do |id|
     skill_inventory.delete(id.to_i)
+    # binding.pry
     redirect "/skills"
   end
 
@@ -48,11 +49,11 @@ class SkillInventoryApp < Sinatra::Base
     erb :error
   end
 
-  def skill_inventory
+def skill_inventory
     if ENV["RACK_ENV"] == "test"
-      database = Sequel.sqlite("db/skills_inventory_test.sqlite3")
+      database = Sequel.sqlite("db/skill_inventory_test.sqlite3")
     else
-      database = Sequel.sqlite("db/skills_inventory_development.sqlite3")
+      database = Sequel.sqlite("db/skill_inventory_development.sqlite3")
     end
     @skill_inventory ||= SkillInventory.new(database)
   end

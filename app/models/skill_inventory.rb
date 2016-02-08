@@ -10,7 +10,7 @@ class SkillInventory
   end
 
   def all
-    dataset.to_a.map {|data| Skill.new(data)}
+    dataset.map {|data| Skill.new(data)}
   end
 
   def dataset
@@ -22,12 +22,13 @@ class SkillInventory
     Skill.new(data)
   end
 
-  def update(id, skill)
+  def update(skill, id)
     dataset.where(:id => id).update(skill)
   end
 
   def delete(id)
     dataset.where(:id => id).delete
+    # binding.pry
   end
 
   def find_by(input)

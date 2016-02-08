@@ -7,7 +7,7 @@ require 'minitest/pride'
 require 'tilt/erb'
 require 'capybara/dsl'
 
-DatabaseCleaner[:sequel, {:connection => Sequel.sqlite("db/task_manager_test.sqlite3")}].strategy = :truncation
+DatabaseCleaner[:sequel, {:connection => Sequel.sqlite("db/skill_inventory_test.sqlite3")}].strategy = :truncation
 
 module TestHelpers
   def setup
@@ -21,7 +21,7 @@ module TestHelpers
   end
 
   def skill_inventory
-    database = Sequel.sqlite('db/task_manager_test.sqlite3')
+    database = Sequel.sqlite('db/skill_inventory_test.sqlite3')
     @skill_inventory ||=SkillInventory.new(database)
   end
 end

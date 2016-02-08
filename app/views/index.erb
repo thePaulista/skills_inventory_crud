@@ -2,7 +2,7 @@
 
 <ol id="skills">
   <% @skills.each do |skill| %>
-  <li id="skill-<%= skill.id%>"><a href="/skill/<%= skill.id%>"><%= skill.title %></a></li>
+  <li id="skill-<%= skill.id%>"><a href="/skills/<%= skill.id%>"><%= skill.title %></a></li>
   <a href="/skills/<%= skill.id %>/edit">Edit</a>
 
   <form action="/skills/<%= skill.id %>" method="post">
@@ -13,7 +13,7 @@
   <% end %>
 </ol>
 <br>
-<a href="/tasks/new">New Skill</a>
+<a href="/skills/new">New Skill</a>
 
 
 

@@ -19,10 +19,9 @@ class SkillInvetoryTest <Minitest::Test
     )
 
     skill = skill_inventory.all.last
-binding.pry
     assert skill.id
     assert_equal "title1", skill.title
-    assert_equal "description1", skill.description1
+    assert_equal "description1", skill.description
   end
 
 end
